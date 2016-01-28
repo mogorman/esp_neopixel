@@ -10,10 +10,12 @@ RgbColor green = RgbColor(0, colorSaturation, 0);
 RgbColor blue = RgbColor(0, 0, colorSaturation);
 RgbColor white = RgbColor(colorSaturation);
 RgbColor black = RgbColor(0);
-
+uint8_t Red = 0;
+uint8_t Green = 0;
+uint8_t Blue = 0;
 void setup()
 {
-  // this resets all the neopixels to an off state
+  // this resets all the neopixels to an off statea
   strip.Begin();
   strip.Show();
 }
@@ -21,23 +23,28 @@ void setup()
 
 void loop()
 {
-    delay(1000);
-
     // set the colors, 
     // if they don't match in order, you may need to use NEO_GRB flag
     for( int i = 0; i < pixelCount; i++) {
-        strip.SetPixelColor(i, white);
+        if(i == 0)  {
+            strip.SetPixelColor(pixelCount-1, black);
+        } else { 
+            strip.SetPixelColor(i-1,black);
+        }
+        strip.SetPixelColor(i, RgbColor(Red,Green,Blue));
+        strip.Show();
     }
-    strip.SetPixelColor(1, green);
-    strip.SetPixelColor(2, blue);
-    strip.SetPixelColor(3, white);
-    strip.Show();
-
-    delay(3000);
-    for( int i = 0; i < pixelCount; i++) {
-        strip.SetPixelColor(i, black);
+    for( int i = pixelCount; i > 0; i--) {
+        if(i == pixelCount)  {
+            strip.SetPixelColor(pixelCount-1, black);
+        } else { 
+            strip.SetPixelColor(i+1,black);
+        }
+        strip.SetPixelColor(i, RgbColor(Red,Blue,Green));
+        strip.Show();
     }
-    // turn off the pixels
-    strip.Show();
+   Red = random(255);
+   Green = random(255);
+   Blue = random(255);
 }
 
