@@ -23,9 +23,10 @@ void setup()
 
 void loop()
 {
+    int i;
     // set the colors, 
     // if they don't match in order, you may need to use NEO_GRB flag
-    for( int i = 0; i < pixelCount; i++) {
+    for( i = 0; i < pixelCount; i++) {
         if(i == 0)  {
             strip.SetPixelColor(pixelCount-1, black);
         } else { 
@@ -34,7 +35,7 @@ void loop()
         strip.SetPixelColor(i, RgbColor(Red,Green,Blue));
         strip.Show();
     }
-    for( int i = pixelCount; i > 0; i--) {
+    for( i = pixelCount; i > 0; i--) {
         if(i == pixelCount)  {
             strip.SetPixelColor(pixelCount-1, black);
         } else { 
